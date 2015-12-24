@@ -17,8 +17,8 @@ class Clusterer:
         self.candidates_name = options.get("candidatesName","candidates")
 
     def f(self,x):
-        print x[1]
-        dictionary = json.loads(x[1])
+        pass
+        #dictionary = json.loads(x[1])
 
 
     def perform(self,rdd):
@@ -32,7 +32,6 @@ class Clusterer:
             else:
                 result = self.compute_clusters(rdd)
         result = self.output_json(result, self.topk, self.candidates_name)
-        result.foreach(lambda x : self.f(x))
         if self.computeIdenticalClusters is True:
             return (result,key_clusterids)
         else:

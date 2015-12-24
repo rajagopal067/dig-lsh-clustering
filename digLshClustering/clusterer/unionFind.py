@@ -147,20 +147,14 @@ class UnionFind:
         self.numTries = 0
         self.options = options
 
-    def f(self,x):
-        print json.loads(x[1])
 
     def perform(self, rdd):
-        rdd.foreach(lambda x : self.f(x))
-        '''
         rdd = self.read_input(rdd)
-
         while True:
             rdd = self.run(rdd)
             if self.isEnd():
                 break
         rdd = self.format_output(rdd)
-        '''
         return rdd
 
     def output_csv(self, key, matches, separator):
@@ -175,7 +169,11 @@ class UnionFind:
     def read_input(self, rdd):
         def parse_json(tuple):
             x = tuple[1]
-            cluster = json.loads(x)["cluster"]
+            ##if it's in the form of rdd x will be a dictionary else it will be string
+            if isinstance(x,dict):
+                cluster = x['cluster']
+            else:
+                cluster = json.loads(x)["cluster"]
             res = []
             for item in cluster:
                 res.append(item["uri"])

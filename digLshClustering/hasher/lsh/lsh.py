@@ -40,6 +40,7 @@ class MinHashSignature(Signature):
     def hash(self, x, n):
         str_n = str(n)
         try:
+            #print x
             combined = str_n + x.encode('utf-8', 'ignore')
             return hashlib.md5(combined).hexdigest()
         except:

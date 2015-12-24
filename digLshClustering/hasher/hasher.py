@@ -13,7 +13,12 @@ class Hasher:
         self.signer = MinHashSignature(options.get("numHashes",100))
         self.hasher = LSH(options.get("numHashes",100),options.get("numItemsInBand",10), None)
 
+    def f(self,x):
+        print x
+
+
     def perform(self,rdd):
+        rdd.foreach(lambda x:self.f(x))
         return self.compute_hashes(rdd)
 
     def compute_hashes(self, data):
@@ -23,6 +28,7 @@ class Hasher:
         if len(row) > 0:
             #print "Sign:", row
             min_hash_sig = self.signer.sign(row)
+            #print min_hash_sig
             if min_hash_sig is not None:
                 lsh_sig = list(self.hasher.hash(min_hash_sig))
                 for lsh_val in lsh_sig:

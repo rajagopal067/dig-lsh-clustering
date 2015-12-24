@@ -1,3 +1,4 @@
+from setuptools import setup, find_packages
 try:
     from setuptools import setup
 except ImportError:
@@ -5,7 +6,7 @@ except ImportError:
 
 
 config = {
-    'name': 'dig-lsh-clustering',
+    'name': 'digLshClustering',
     'description': 'code to cluster based on lsh algorithm',
     'author': 'Dipsy Kapoor',
     'url': 'https://github.com/usc-isi-i2/dig-lsh-clustering.git',
@@ -13,10 +14,10 @@ config = {
     'author_email': 'dipsykapoor@gmail.com',
     'install_requires': ['nose2',
                          'digSparkUtil',
-                         'jq'],
-    # dependency_links=['http://github.com/user/repo/tarball/master#egg=package-1.0']
-    # these are the (sub)modules of the current directory that we care about
-    'packages': ['hasher', 'hasher.old', 'hasher.lsh','gen_int_input','clusterer','clusterer.old','utils'],
+                         'jq',
+                         'digTokenizer'],
+    'version':'0.1.3',
+    'packages': find_packages(exclude=['docs', 'tests','digLshClustering.gen_int_input']),
     'scripts': []
 }
 
